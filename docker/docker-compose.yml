@@ -4,7 +4,8 @@ services:
   api-gateway:
     build:
       context: ..
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile
+      network: host
       args:
         SERVICE_NAME: api-gateway
     ports:
@@ -12,7 +13,6 @@ services:
     depends_on:
       - auth-service
       - logging-service
-      - notification-service
       - kafka
       - postgres
     environment:
@@ -48,24 +48,6 @@ services:
       dockerfile: docker/Dockerfile
       args:
         SERVICE_NAME: logging-service
-    depends_on:
-      - kafka
-      - postgres
-    environment:
-      - NODE_ENV=production
-      - KAFKA_BROKERS=kafka:9092
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=myapp
-      - POSTGRES_USER=myuser
-      - POSTGRES_PASSWORD=mypassword
-
-  notification-service:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      args:
-        SERVICE_NAME: notification-service
     depends_on:
       - kafka
       - postgres

@@ -15,11 +15,6 @@ import { AppController } from './app.controller';
         transport: Transport.TCP,
         options: { host: 'localhost', port: 3002 },
       },
-      {
-        name: 'NOTIFICATION_SERVICE',
-        transport: Transport.TCP,
-        options: { host: 'localhost', port: 3003 },
-      },
     ]),
   ],
   controllers: [AppController],
